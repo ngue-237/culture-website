@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}{% endblock %}</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>aranoz</title>
+        <link rel="icon" href="{{asset('assetsF/')}}{{asset('assetsF/')}}/img/favicon.png">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/bootstrap.min.css">
+        <!-- animate CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/animate.css">
+        <!-- owl carousel CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/owl.carousel.min.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/all.css">
+        <!-- flaticon CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/flaticon.css">
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/themify-icons.css">
+        <!-- font awesome CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/magnific-popup.css">
+        <!-- swiper CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/slick.css">
+        <!-- style CSS -->
+        <link rel="stylesheet" href="{{asset('assetsF/')}}css/style.css">
+        {% block stylesheets %}
+            {#{{ encore_entry_link_tags('app') }}#}
+        {% endblock %}
+
+        {% block javascripts %}
+            {#{{ encore_entry_script_tags('app') }}#}
+        {% endblock %}
+    </head>
+    <body>
+        {% block body %}{% endblock %}
+        {% block content %} {% endblock %}
+
+        <script src="{{asset('assetsF/')}}js/jquery-1.12.1.min.js"></script>
+        <!-- popper js -->
+        <script src="{{asset('assetsF/')}}js/popper.min.js"></script>
+        <!-- bootstrap js -->
+        <script src="{{asset('assetsF/')}}js/bootstrap.min.js"></script>
+        <!-- easing js -->
+        <script src="{{asset('assetsF/')}}js/jquery.magnific-popup.js"></script>
+        <!-- swiper js -->
+        <script src="{{asset('assetsF/')}}js/swiper.min.js"></script>
+        <!-- swiper js -->
+        <script src="{{asset('assetsF/')}}js/masonry.pkgd.js"></script>
+        <!-- particles js -->
+        <script src="{{asset('assetsF/')}}js/owl.carousel.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/jquery.nice-select.min.js"></script>
+        <!-- slick js -->
+        <script src="{{asset('assetsF/')}}js/slick.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/jquery.counterup.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/waypoints.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/contact.js"></script>
+        <script src="{{asset('assetsF/')}}js/jquery.ajaxchimp.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/jquery.form.js"></script>
+        <script src="{{asset('assetsF/')}}js/jquery.validate.min.js"></script>
+        <script src="{{asset('assetsF/')}}js/mail-script.js"></script>
+        <!-- custom js -->
+        <script src="{{asset('assetsF/')}}js/custom.js"></script>
+    </body>
+</html>
