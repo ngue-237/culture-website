@@ -1,0 +1,17 @@
+{% extends 'baseB.html.twig' %}
+{% block title %}listeblog{% endblock %}
+
+{% block content %}
+    <!-- Topbar -->
+    {{include('includes/backoffice/navbar.html.twig')}}
+    <!-- End of Topbar -->
+    <!-- Sidebar -->
+    {{include('includes/backoffice/sidebar.html.twig')}}
+    <!-- End of Sidebar -->
+    <h1>Ajouter blog</h1>
+    {{ form_start(form) }}
+    {{ form_end(form) }}
+    <!-- Footer -->
+    {{include('includes/backoffice/footer.html.twig')}}
+    <!-- End of Footer -->
+{% endblock %}

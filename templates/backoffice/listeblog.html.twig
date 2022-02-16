@@ -1,0 +1,34 @@
+{% extends 'baseB.html.twig' %}
+{% block title %}listeblog{% endblock %}
+
+{% block content %}
+    <!-- Topbar -->
+    {{include('includes/backoffice/navbar.html.twig')}}
+    <!-- End of Topbar -->
+    <!-- Sidebar -->
+    {{include('includes/backoffice/sidebar.html.twig')}}
+    <!-- End of Sidebar -->
+    <h1>liste des blogs</h1>
+    <button onclick="window.location.href = 'http://127.0.0.1:8000/addblog';"> Ajouter un blog </button>
+    <br>
+    </br>
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>titre</th>
+            <th>contenu</th>
+            <th>update</th>
+            <th>Delete</th>
+        </tr>
+        <tr {% for c in listeblog %}>
+            <td>{{ c.id }}</td>
+            <td>{{ c.titre }}</td>
+            <td>{{ c.cnt }}</td>
+            <td><a href="{{ path('d',{'id':c.id}) }}">Delete</a> </td>
+            <td><a href="{{ path('updateblog',{'id':c.id}) }}">update</a> </td>
+        </tr {% endfor %}>
+    </table>
+    <!-- Footer -->
+    {{include('includes/backoffice/footer.html.twig')}}
+    <!-- End of Footer -->
+{% endblock %}

@@ -1,8 +1,6 @@
 {
-    "name": "symfony/website-skeleton",
     "type": "project",
-    "license": "MIT",
-    "description": "A skeleton to start a new Symfony website",
+    "license": "proprietary",
     "require": {
         "php": ">=7.1.3",
         "ext-ctype": "*",
@@ -34,7 +32,6 @@
         "symfony/twig-bundle": "4.4.*",
         "symfony/validator": "4.4.*",
         "symfony/web-link": "4.4.*",
-        "symfony/web-server-bundle": "4.4.*",
         "symfony/yaml": "4.4.*",
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0"
@@ -47,7 +44,8 @@
         "symfony/maker-bundle": "^1.0",
         "symfony/phpunit-bridge": "^6.0",
         "symfony/stopwatch": "4.4.*",
-        "symfony/web-profiler-bundle": "4.4.*"
+        "symfony/web-profiler-bundle": "4.4.*",
+        "symfony/web-server-bundle": "4.4.*"
     },
     "config": {
         "allow-plugins": {

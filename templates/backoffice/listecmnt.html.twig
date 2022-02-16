@@ -1,0 +1,32 @@
+{% extends 'baseB.html.twig' %}
+{% block title %}listeblog{% endblock %}
+
+{% block content %}
+    <!-- Topbar -->
+    {{include('includes/backoffice/navbar.html.twig')}}
+    <!-- End of Topbar -->
+    <!-- Sidebar -->
+    {{include('includes/backoffice/sidebar.html.twig')}}
+    <!-- End of Sidebar -->
+    <h1>liste des  commentaires</h1>
+
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>commentaire</th>
+
+
+            <th>Delete</th>
+        </tr>
+        <tr {% for c in listecmnt %}>
+            <td>{{ c.id }}</td>
+
+            <td>{{ c.cnt }}</td>
+            <td><a href="{{ path('dcmnt',{'id':c.id}) }}">Delete</a> </td>
+
+        </tr {% endfor %}>
+    </table>
+    <!-- Footer -->
+    {{include('includes/backoffice/footer.html.twig')}}
+    <!-- End of Footer -->
+{% endblock %}
