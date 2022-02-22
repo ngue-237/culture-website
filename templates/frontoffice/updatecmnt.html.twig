@@ -39,28 +39,34 @@
         </div>
     </section>
     <!-- breadcrumb start-->
-    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
 
+    <div class="grix xs2 sm3 gutter-0 card">
+
+        <div class="col-xs2 col-sm3">
 
 
-        <tr {% for c in listeblog %}>
-
-            <td>{{ c.titre }}
-                <br>
-                <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
-
-                <a href="{{ path('blogf',{'id':c.id}) }}">lire</a>
-            </td>
+            {{ form_start(fbc,{'attr': {'novalidate': 'novalidate'}} ) }}
+            {{ form_label(fbc.email,"votre e-mail") }}
+            {{ form_widget(fbc.email)}}
+            {{ form_errors(fbc.email) }}
 
 
+            {{ form_label(fbc.nickname,"votre pseudo") }}
+            {{ form_widget(fbc.nickname)}}
+            {{ form_errors(fbc.nickname) }}
+
+            {{ form_label(fbc.cnt,"votre ecommentaire") }}
+            {{ form_widget(fbc.cnt)}}
+            {{ form_errors(fbc.cnt) }}
 
 
-        </tr {% endfor %}>
-
-
-
-    </table>
+            {{ form_label(fbc.rgpd,"") }}
+            {{ form_widget(fbc.rgpd)}}
+            {{ form_errors(fbc.rgpd) }}
+            {{ form_end(fbc) }}
+        </div>
+    </div>
     <!-- ================ contact section start ================= -->
 
     {{include('includes/frontoffice/footer.html.twig')}}

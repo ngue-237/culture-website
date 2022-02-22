@@ -44,16 +44,17 @@
 
 
 
-        <tr {% for c in listeblog %}>
+        <tr {% for c in blogf %}>
+            {% if id == c.id  %}
+                <td>{{ c.titre }}
+                    <br>
 
-            <td>{{ c.titre }}
-                <br>
-                <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
+                    <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
+                    {{ c.cnt }}
 
-                <a href="{{ path('blogf',{'id':c.id}) }}">lire</a>
-            </td>
+                </td>
 
-
+            {% endif %}
 
 
         </tr {% endfor %}>
@@ -61,6 +62,45 @@
 
 
     </table>
+
+<div class="grix xs2 sm3 gutter-0 card">
+    <div class="col-xs2 col-sm3">
+        <h2>liste des commentaires</h2>
+       {% for cmnt in blog.cmnts %}
+           <p>publie par {{ cmnt.nickname}} le {{ cmnt.createdAt|date("d/m/y H:i")}} </p>
+           <div>{{ cmnt.cnt|raw }}</div>
+          <a href="{{ path('aaa',{'id':cmnt.id}) }}">Delete</a>
+           <a href="{{ path('updatecmnt',{'id':cmnt.id}) }}">update</a>
+        {% endfor %}
+
+
+    </div>
+    <div class="col-xs2 col-sm3">
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(formc,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        {{ form_label(formc.email,"votre e-mail") }}
+        {{ form_widget(formc.email)}}
+        {{ form_errors(formc.email) }}
+
+
+        {{ form_label(formc.nickname,"votre pseudo") }}
+        {{ form_widget(formc.nickname)}}
+        {{ form_errors(formc.nickname) }}
+
+        {{ form_label(formc.cnt,"votre ecommentaire") }}
+        {{ form_widget(formc.cnt)}}
+        {{ form_errors(formc.cnt) }}
+
+
+        {{ form_label(formc.rgpd,"") }}
+        {{ form_widget(formc.rgpd)}}
+        {{ form_errors(formc.rgpd) }}
+
+
+        {{ form_end(formc) }}
+    </div>
+</div>
     <!-- ================ contact section start ================= -->
 
     {{include('includes/frontoffice/footer.html.twig')}}
