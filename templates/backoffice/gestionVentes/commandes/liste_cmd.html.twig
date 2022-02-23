@@ -223,8 +223,7 @@
                 <div class="container-fluid">
                     <div class="d-sm-flex align-items-center justify-content-between mb-4">
                         <h1 class="h3 mb-0 text-gray-800">Gestion des commandes</h1>
-                        <a href="{{path('creer_facture')}}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-print"></i>&nbsp;Imprimer</a>
+
                     </div>
 
                     <div class="card shadow mb-4">
@@ -236,38 +235,34 @@
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>ID User</th>
+                                            <th>Prix Total</th>
+                                            <th>Date</th>
                                             <th>Options</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
-                                            <th>Position</th>
-                                            <th>Office</th>
-                                            <th>Age</th>
-                                            <th>Start date</th>
+                                            <th>ID User</th>
+                                            <th>Prix Total</th>
+                                            <th>Date</th>
                                             <th>Options</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
-                                        <tr>
-                                            <td>Tiger Nixon</td>
-                                            <td>System Architect</td>
-                                            <td>Edinburgh</td>
-                                            <td>61</td>
-                                            <td>2011/04/25</td>
-                                            <td>
-                                                <a href="#" > <i class="fas fa-eye"></i></a> &nbsp;
-                                                <a href="{{path('admin_cmd_modifier')}} " > <i class="fas fa-edit"></i></a>&nbsp;
-                                                <a href="#" > <i class="fas fa-trash-alt"></i></a>&nbsp;
-                                                <i class="fas fa-check-circle"></i>
-                                            </td>
-                                        </tr>
+                                        {% for commande in commandes %}
+                                            <tr>
+                                                <td>{{ commande.idUser }}</td>
+                                                <td>{{ commande.totalPaiment }}</td>
+                                                <td>{{ commande.date | date('d/m/Y') }} à {{ commande.date | date('H:i')}}</td>
+                                                <td>
+                                                    <a href="{{ path('commande_detail', {'id':commande.id}) }}" > <i class="fas fa-eye"></i></a> &nbsp;
+                                                    <a href="{{ path('commande_supprimer', {'id':commande.id}) }}" > <i class="fas fa-trash-alt"></i></a>&nbsp;
+                                                    <a href="{{ path('facture_creer', {'id':commande.id}) }}" > <i class="fas fa-file-invoice-dollar"></i></a>&nbsp;
+                                                    <i class="fas fa-check-circle"></i>
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
                                         
                                     </tbody>
                                 </table>

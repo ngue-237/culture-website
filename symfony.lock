@@ -31,11 +31,13 @@
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "2.4",
-            "ref": "06a5dfe6c1b12da89276b72ed281be757d24c8a0"
+            "version": "2.3",
+            "ref": "4f5eb542f01475cc2eb49624e2f1a3ea458e73bf"
         },
         "files": [
             "./config/packages/doctrine.yaml",
+            "./config/packages/prod/doctrine.yaml",
+            "./config/packages/test/doctrine.yaml",
             "./src/Entity/.gitignore",
             "./src/Repository/.gitignore"
         ]
@@ -179,7 +181,7 @@
         "version": "4.0.4"
     },
     "sebastian/global-state": {
-        "version": "5.0.4"
+        "version": "5.0.5"
     },
     "sebastian/lines-of-code": {
         "version": "1.0.3"
@@ -379,8 +381,8 @@
         "recipe": {
             "repo": "github.com/symfony/recipes",
             "branch": "master",
-            "version": "3.7",
-            "ref": "a7bace7dbc5a7ed5608dbe2165e0774c87175fe6"
+            "version": "3.3",
+            "ref": "2120e71a370db3a494b8afcc42d7cfb2cff6f910"
         },
         "files": [
             "./config/packages/dev/monolog.yaml",
@@ -406,9 +408,6 @@
             "./phpunit.xml.dist",
             "./tests/bootstrap.php"
         ]
-    },
-    "symfony/polyfill-intl-grapheme": {
-        "version": "v1.24.0"
     },
     "symfony/polyfill-intl-icu": {
         "version": "v1.24.0"
@@ -492,9 +491,6 @@
     },
     "symfony/stopwatch": {
         "version": "v4.4.37"
-    },
-    "symfony/string": {
-        "version": "v5.4.3"
     },
     "symfony/translation": {
         "version": "4.4",

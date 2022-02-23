@@ -48,60 +48,76 @@
     <div class="container">
       <div class="cart_inner">
         <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Product</th>
-                <th scope="col">Price</th>
-                <th scope="col">Quantity</th>
-                <th scope="col">Total</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="d-flex">
-                      <img src="{{asset('assetsF/')}}/img/product/single-product/cart-1.jpg" alt="" />
-                    </div>
-                    <div class="media-body">
-                      <p>Minimalistic shop for multipurpose use</p>
-                    </div>
-                  </div>
-                </td>
-                <td>
-                  <h5>$360.00</h5>
-                </td>
-                <td>
-                  <div class="product_count">
-                    <span class="input-number-decrement"> <i class="ti-angle-down"></i></span>
-                    <input class="input-number" type="text" value="1" min="0" max="10">
-                    <span class="input-number-increment"> <i class="ti-angle-up"></i></span>
-                  </div>
-                </td>
-                <td>
-                  <h5>$720.00</h5>
-                </td>
-              </tr>
-              <tr>
-                <td></td>
-                <td></td>
-                <td>
-                  <h5>Total</h5>
-                </td>
-                <td>
-                  <h5>$2160.00</h5>
-                </td>
-              </tr>
-              
-            </tbody>
-          </table>
+         {% if items | length >0 %}
+           <table class="table">
+             <thead>
+             <tr>
+               <th scope="col">Produits</th>
+               <th scope="col">Prix</th>
+               <th scope="col">Quantité</th>
+               <th scope="col">Total</th>
+               <th scope="col">Actions</th>
+             </tr>
+             </thead>
+             <tbody>
+             {% for item in items %}
+               <tr>
+                 <td>
+                   <div class="media">
+                     <div class="d-flex">
+                       <img src="{{asset('assetsF/')}}/img/product/single-product/cart-1.jpg" alt="" />
+                     </div>
+                     <div class="media-body">
+                       <p>{{ item.product.nom }}</p>
+                     </div>
+                   </div>
+                 </td>
+                 <td>
+                   <h5>{{ item.product.prix }}</h5>
+                 </td>
+                 <td>
+                   <h5>{{ item.quantity }}</h5>
+                 </td>
+                 <td>
+                   <h5>{{ item.quantity * item.product.prix}}</h5>
+                 </td>
+                 <td>
+                   <a href="{{ path('cart_add', {'id': item.product.id }) }}">
+                     <i class="fas fa-chevron-up"></i>
+                   </a>
+                   &nbsp;&nbsp;
+                   <a href="{{ path('cart_remove', {'id': item.product.id }) }}">
+                     <i class="fas fa-chevron-down"></i>
+                   </a>
+                   &nbsp;&nbsp;
+                   <a href="{{ path('cart_supprimer', {'id': item.product.id })}}"><i class="fas fa-trash-alt"></i></a>
+                 </td>
+               </tr>
+             {% endfor %}
+             <tr>
+               <td></td>
+               <td></td>
+               <td>
+                 <h5>Total</h5>
+               </td>
+
+               <td>
+                 <h5>{{ total }}</h5>
+               </td>
+               <td></td>
+             </tr>
+             </tbody>
+           </table>
+          {% else %}
+           <p>Désolé votre panier est encore vide</p>
+          {% endif %}
           <div class="checkout_btn_inner float-right">
-            <a class="btn_1" href="#">Continuer Vos Achats</a>
+            <a class="btn_1" href="{{ path('liste_produits') }}">Continuer Vos Achats</a>
             <a class="btn_1 checkout_btn_1" href="{{path('passer_cmd')}}">Passer La Commande</a>
           </div>
         </div>
       </div>
+    </div>
   </section>
   {{include('includes/frontoffice/footer.html.twig')}}
   

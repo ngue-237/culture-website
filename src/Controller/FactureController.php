@@ -2,6 +2,12 @@
 
 namespace App\Controller;
 
+use App\Entity\Facture;
+use App\Form\FactureType;
+use App\Repository\CommandeRepository;
+use App\Repository\ProductCartRepository;
+use App\Repository\ProduitsRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -19,10 +25,30 @@ class FactureController extends AbstractController
     }
 
     /**
-     * @Route("/admin/facture/creer_facuture", name="creer_facture")
+     * @Route("/admin/facture/creer_facuture/{id}", name="facture_creer")
      */
-    public function creerFacture(){
-        return $this->render('backoffice/gestionVentes/factures/creer_facture.html.twig');
+    public function creerFacture($id, ProduitsRepository $repProd, CommandeRepository $repCmd, ProductCartRepository $rep, EntityManagerInterface $em){
+        $commande = $repCmd->find($id);
+
+        $query = $em->createQuery("select s From APP\Entity\ProductCart s where s.idCommande = :id")
+            ->setParameter("id", $id);
+        $productCart = $query->getResult();
+        //dd($productCart);
+        $produits = [];
+
+        for ( $i =0; $i< count($productCart); $i++ ){
+            $produits[] = [
+                'produit'=>$repProd->find($productCart[$i]->getIdProduit()),
+                'quantite'=>$productCart[$i]->getQuantite()
+            ];
+        }
+        //dd($produits);
+
+        return $this->render('backoffice/gestionVentes/factures/facture.html.twig', [
+            "commande"=>$commande,
+            "productCart"=>$productCart,
+            "produits"=>$produits
+        ]);
     }
 
     /**
