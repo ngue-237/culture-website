@@ -1,0 +1,40 @@
+
+{{ form_start(form,{'attr': {'novalidate': 'novalidate','class': 'row contact_form'}} ) }}
+
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.name,{'attr': {'class': 'form-control' , 'placeholder' : 'First Name'}}) }}
+    {{ form_errors(form.name) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.lastname,{'attr': {'class': 'form-control ' , 'placeholder' : 'Last Name'}}) }}
+    {{ form_errors(form.lastname) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.email,{'attr': {'class': 'form-control' , 'placeholder' : 'Email Address'}}) }}
+    {{ form_errors(form.email) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.password,{'attr': {'class': 'form-control' , 'placeholder' : 'Password'}}) }}
+    {{ form_errors(form.password) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.gender,{'attr': {'class': 'shipping_select section_bg' , 'placeholder' : 'gender'}}) }}
+    {{ form_errors(form.gender) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.phone,{'attr': {'class': 'form-control' , 'placeholder' : 'phone'}}) }}*
+    {{ form_errors(form.phone) }}
+</div>
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.birthday,{'attr': {'class': 'shipping_select section_bg' , 'placeholder' : 'birthday'}}) }}
+    {{ form_errors(form.birthday) }}
+</div>
+
+<div class="col-md-12 form-group p_star">
+    {{ form_widget(form.photo,{'attr': {'class': '' , 'placeholder' : 'photo'}}) }}
+    {{ form_errors(form.photo) }}
+</div>
+
+
+    <button class="btn">{{ button_label|default('Register') }}</button>
+{{ form_end(form) }}

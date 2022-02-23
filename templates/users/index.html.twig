@@ -1,0 +1,82 @@
+{% extends 'baseB.html.twig' %}
+
+{% block title %}Users index{% endblock %}
+
+{% block body %}
+<h1>Users index</h1>
+
+{% for message in app.flashes('info') %}
+    <div class=" ">{{ message }} </div>
+{% endfor %}
+
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">DataTables Example</h6>
+    </div>
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                <thead>
+                <tr>
+                    <th>id</th>
+                    <th>Name</th>
+                    <th>last name</th>
+                    <th>email</th>
+                    <th>password</th>
+                    <th>gender</th>
+                    <th>photo</th>
+                    <th>phone</th>
+                    <th>birthday</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.name }}</td>
+                        <td>{{ user.lastname }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.password }}</td>
+                        {% if user.gender=="male" %}
+                            <td style="background-color: cadetblue ; color: black">Male</td>
+                        {% elseif user.gender=="female" %}
+                            <td style="background-color:pink">Female</td>
+                        {% else %}
+                            <td style="background-color:black">Not mentioned</td>
+                        {% endif %}
+                        <th>
+                            <img src="{{ asset('assets/qr-code/' ~ user.photo ) }}">
+                        </th>
+                        <td>{{ user.phone }}</td>
+                        <td>{{ user.birthday ? user.birthday|date('Y-m-d') : '' }}</td>
+                        <td>
+                            <a class="btn btn-warning btn-icon-split" href="{{ path('users_show', {'id': user.id}) }}">show</a>
+                        </td>
+                        <td>
+
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="10">no records found</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <a href="{{ path('users_new') }}" class="btn btn-success btn-icon-split">
+                                        <span class="icon text-white-50">
+                                            <i class="fas fa-check"></i>
+                                        </span>
+            <span class="text">Create new</span>
+        </a>
+        <form method="post" action="{{ path('searchRec') }}">
+
+            <input type="Text" name='search' class="form-control" placeholder="Search">
+            <input type="submit" class="btn-dark" Value="rechercher">
+        </form>
+        <a href="{{ path('trousers') }}" class="btn btn-dark">tri mail</a>
+
+        {% endblock %}
