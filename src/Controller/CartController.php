@@ -17,4 +17,14 @@ class CartController extends AbstractController
             
         ]);
     }
+
+    /**
+     *@Route("/admin/cart", name="admin_cart")
+     *
+     * @return void
+     */
+    public function cartAdmin(){
+
+        return $this->render('backoffice/cart.html.twig');
+    }
 }
