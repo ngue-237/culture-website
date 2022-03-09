@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Controller;
-
+use App\Repository\CalendarRepository;
 use App\Entity\Blog;
 use App\Form\BlogType;
 use App\Repository\BlogRepository;
@@ -16,19 +16,65 @@ use Symfony\Component\HttpKernel\KernelInterface;
 use App\Repository\CmntRepository;
 use App\Entity\Cmnt;
 use App\Form\CmntType;
+use Knp\Bundle\SnappyBundle\KnpSnappyBundle;
+use Knp\Component\Pager\PaginatorInterface;
+use Gregwar\CaptchaBundle\Type\CaptchaType;
 class BlogController extends AbstractController
 {
+    /**
+     * @Route("/clnd", name="main")
+     */
+    public function index(CalendarRepository $calendar)
+    {
+        $events = $calendar->findAll();
+
+        $rdvs = [];
+
+        foreach($events as $event){
+            $rdvs[] = [
+                'id' => $event->getId(),
+                'start' => $event->getStart()->format('Y-m-d H:i:s'),
+                'end' => $event->getEnd()->format('Y-m-d H:i:s'),
+                'title' => $event->getTitle(),
+                'description' => $event->getDescription(),
+                'backgroundColor' => $event->getBackgroundColor(),
+                'borderColor' => $event->getBorderColor(),
+                'textColor' => $event->getTextColor(),
+                'allDay' => $event->getAllDay(),
+            ];
+        }
+
+        $data = json_encode($rdvs);
+
+        return $this->render('main/index.html.twig', compact('data'));
+    }
+
+
+
+
     /**
      * @param BlogRepository $repository
      * @return Response
      * @Route("/blog", name="blog")
      */
-    public function index(BlogRepository $repository)
+    public function indexx(BlogRepository $repository,PaginatorInterface $paginator,\Symfony\Component\HttpFoundation\Request $request)
     {
         $listeblog=$repository->findAll();
-        return $this->render('frontoffice/blog.html.twig', ['listeblog'=>$listeblog
-            
+        $articles = $paginator->paginate(
+            $listeblog, // Requête contenant les données à paginer (ici nos articles)
+            $request->query->getInt('page', 1), // Numéro de la page en cours, passé dans l'URL, 1 si aucune page
+            6 // Nombre de résultats par page
+        );
+        return $this->render('frontoffice/blog.html.twig', [
+            'articles' => $articles,
         ]);
+
+
+
+
+        //return $this->render('frontoffice/blog.html.twig', ['listeblog'=>$listeblog
+
+       // ]);
     }
     /**
      * @param \Symfony\Component\HttpFoundation\Request $request
@@ -42,6 +88,8 @@ class BlogController extends AbstractController
         $blog=$repository->findOneBy(['id'=>$id]);
         $cmnt = new Cmnt();
         $formc = $this->createForm(CmntType::class, $cmnt);
+        $formc->add('captcha', CaptchaType::class);
+        $formc->add('Ajouter',SubmitType::class);
         $formc->handleRequest($request);
         if ($formc->isSubmitted() && $formc->isValid()) {
             $cmnt->setCreatedAt(new \DateTimeImmutable());
@@ -56,6 +104,31 @@ class BlogController extends AbstractController
         return $this->render('frontoffice/blogf.html.twig', ['blogf'=>$blogf,'id'=>$id,'formc'=>$formc->createView(),'blog'=>$blog
 
         ]);
+
+    }
+    /**
+     * @param \Symfony\Component\HttpFoundation\Request $request
+     * @param $id
+     * @param BlogRepository $repository
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
+     * @Route("/pdf/{id}",name="pdf")
+*/
+    public function pdf(\Symfony\Component\HttpFoundation\Request $request,\Knp\Snappy\Pdf $snappy,$id,BlogRepository $repository){
+       // $this->knpSnappy = $knpSnappy;
+        //$snappy = $this->get("knp_snappy.pdf");
+        $blogf=$repository->findAll();
+
+                //$html ="{{c.titre}}"
+
+
+
+     $html=$this->renderView('frontoffice/pdf.html.twig',["title"=>"mmmmmmmmmmmmm",'blogf'=>$blogf,'id'=>$id]);
+     $filename = "pdf";
+
+         return new Response($snappy->getOutputFromHtml($html),200,
+             ['Content-Type'=>'application/pdf','Content-Disposition'=> 'inline;filename="'.$filename.'.pdf"' ]
+
+         );
 
     }
 
@@ -146,4 +219,17 @@ class BlogController extends AbstractController
         }
         return $this->render('backoffice/updateblog.html.twig',['f'=>$form->createView()]);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

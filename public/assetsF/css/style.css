@@ -20,6 +20,9 @@ body {
   margin: 0;
   font-size: 14px;
 }
+.aa{
+  display: flex;
+}
 
 /* line 11, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_common.scss */
 .message_submit_form:focus {

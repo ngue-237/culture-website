@@ -46,11 +46,12 @@
 
         <tr {% for c in blogf %}>
             {% if id == c.id  %}
-                <td>{{ c.titre }}
+                <td><h1>{{ c.titre }}</h1> <a href="{{ path('pdf',{'id':c.id}) }}"  class="btn btn-primary">telecherger pdf</a><br>
                     <br>
 
                     <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
                     {{ c.cnt }}
+
 
                 </td>
 

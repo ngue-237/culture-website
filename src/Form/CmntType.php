@@ -34,7 +34,7 @@ class CmntType extends AbstractType
                     'class'=>'form-control'
                 ]])
             ->add('rgpd',CheckboxType::class)
-            ->add('envoyer',SubmitType::class)
+
         ;
     }
 

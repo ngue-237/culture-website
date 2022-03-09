@@ -44,13 +44,13 @@
 
 
 
-        <tr {% for c in listeblog %}>
+        <tr {% for c in articles %}>
 
-            <td>{{ c.titre }}
+            <td><h1>{{ c.titre }}</h1> <a href="{{ path('blogf',{'id':c.id}) }} " class="btn btn-primary">lire</a> <br>
                 <br>
                 <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
 
-                <a href="{{ path('blogf',{'id':c.id}) }}">lire</a>
+
             </td>
 
 
@@ -60,7 +60,12 @@
 
 
 
+
+
     </table>
+
+    <h1  >    {{ knp_pagination_render(articles) }}</h1>
+
     <!-- ================ contact section start ================= -->
 
     {{include('includes/frontoffice/footer.html.twig')}}
