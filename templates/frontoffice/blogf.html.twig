@@ -1,0 +1,108 @@
+{%extends 'baseF.html.twig'%}
+{% block title %}blog{% endblock %}
+{% block content %}
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    {{include('includes/frontoffice/navbar.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+    <!-- Header part end-->
+
+    <!--================Home Banner Area =================-->
+    <!-- breadcrumb start-->
+    <section class="breadcrumb breadcrumb_bg">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <div class="breadcrumb_iner">
+                        <div class="breadcrumb_iner_item">
+                            <h2>blog</h2>
+                            <p>Home <span>-</span> blog</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- breadcrumb start-->
+    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+
+
+
+
+        <tr {% for c in blogf %}>
+            {% if id == c.id  %}
+                <td><h1>{{ c.titre }}</h1> <a href="{{ path('pdf',{'id':c.id}) }}"  class="btn btn-primary">telecherger pdf</a><br>
+                    <br>
+
+                    <img src="{{ asset('uploads/images/' ~ c.photo) }}" alt="" style="width:300px;height:300px;">
+                    {{ c.cnt }}
+
+
+                </td>
+
+            {% endif %}
+
+
+        </tr {% endfor %}>
+
+
+
+    </table>
+
+<div class="grix xs2 sm3 gutter-0 card">
+    <div class="col-xs2 col-sm3">
+        <h2>liste des commentaires</h2>
+       {% for cmnt in blog.cmnts %}
+           <p>publie par {{ cmnt.nickname}} le {{ cmnt.createdAt|date("d/m/y H:i")}} </p>
+           <div>{{ cmnt.cnt|raw }}</div>
+          <a href="{{ path('aaa',{'id':cmnt.id}) }}">Delete</a>
+           <a href="{{ path('updatecmnt',{'id':cmnt.id}) }}">update</a>
+        {% endfor %}
+
+
+    </div>
+    <div class="col-xs2 col-sm3">
+        <h2>Ajouter un commentaire</h2>
+        {{ form_start(formc,{'attr': {'novalidate': 'novalidate'}} ) }}
+
+        {{ form_label(formc.email,"votre e-mail") }}
+        {{ form_widget(formc.email)}}
+        {{ form_errors(formc.email) }}
+
+
+        {{ form_label(formc.nickname,"votre pseudo") }}
+        {{ form_widget(formc.nickname)}}
+        {{ form_errors(formc.nickname) }}
+
+        {{ form_label(formc.cnt,"votre ecommentaire") }}
+        {{ form_widget(formc.cnt)}}
+        {{ form_errors(formc.cnt) }}
+
+
+        {{ form_label(formc.rgpd,"") }}
+        {{ form_widget(formc.rgpd)}}
+        {{ form_errors(formc.rgpd) }}
+
+
+        {{ form_end(formc) }}
+    </div>
+</div>
+    <!-- ================ contact section start ================= -->
+
+    {{include('includes/frontoffice/footer.html.twig')}}
+{% endblock %}

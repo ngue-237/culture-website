@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="{{
+        asset('assetsB/')
+      }}vendor/datatables/dataTables.bootstrap4.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+        body{
+            background-image: url("public/factures/cultlogo.png");
+            background-repeat: no-repeat;
+            background-position: right calc(0.375em + 0.1875rem) center;
+            background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+        }
+      #customers {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+      }
+
+      #customers td,
+      #customers th {
+        border: 1px solid #ddd;
+        padding: 8px;
+      }
+
+      #customers tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      #customers tr:hover {
+        background-color: #ddd;
+      }
+
+      #customers th {
+        padding-top: 12px;
+        padding-bottom: 12px;
+        text-align: left;
+        background-color: #4160A0;
+        color: white;
+      }
+      .color-bleue{
+          color:#4160A0
+      }
+      .text-center{
+          color:#4160A0;
+          text-align: center;
+      }
+      .text-rigth{
+          text-align: right;
+          color:#4160A0
+      }
+    </style>
+    <div class="container-fluid">
+        <div class="row text-rigth">
+            
+        </div>
+      <div class="row">
+        <div class="col-lg-12 offset-5">
+          <h1 class="text-center">Votre facture</h1>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-6">
+          <h4>Identifiant Utilisateur : {{ commande.idUser }}</h4>
+        </div>
+        <div class="col-lg-6">
+          <h4>
+            Date
+            <span>
+              {{ commande.date | date("d/m/y à h:m") }}
+            </span>
+          </h4>
+        </div>
+      </div>
+      <table id="customers">
+      <tr>
+        <th>Désignation</th>
+        <th>Prix</th>
+        <th>Quantité</th>
+      </tr>
+      <tbody>
+          <tr>
+            {% for prod in produits %}
+              <tr>
+                <td>{{ prod.produit.nom }}</td>
+                <td>{{ prod.produit.prix }}</td>
+                <td>{{ prod.quantite }}</td>
+              </tr>
+              {% endfor %}
+          </tr>
+      </tbody>
+      <tfoot>
+          <th scope="col"></th>
+          <th scope="col-2"></th>
+          <th scope="col">total: {{ commande.totalPaiment }} Dt</th>
+        </tfoot>
+    </table>
+      <div class="row text-rigth">
+          <p>Culture, Le monde en deux click!</p>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"
+      integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>

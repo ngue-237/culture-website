@@ -1,0 +1,38 @@
+{% block content %}
+
+<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
+        <tr align="center">
+            <th>Réference</th>
+            <th>Designation</th>
+            <th>Prix</th>
+            <th>Cathegorie</th>
+            <th>Quantite</th>
+            <th>Image</th>
+          
+        </tr>
+        </thead>
+
+        <tbody>
+        {% for i in data %}
+            <td align="center">
+                <td>{{ i.id }}</td>
+                <td>{{ i.designation }}</td>
+                <td>{{ i.prix }}</td>
+                <td>{{ i.cathegorie.id }}</td>
+                <td>{{ i.quantite }}</td>
+            <td><img src ="{{ asset('images/' ~  i.image) }}"
+                     width="50"
+                      height="50">
+                    </td>
+
+
+            </tr>
+
+        {% endfor %}
+
+
+        </tbody>
+    </table>
+
+    {% endblock %}

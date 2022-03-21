@@ -1,89 +1,105 @@
-{%extends 'baseF.html.twig'%}
-{% block title %}Panier | culture{% endblock %}
-{% block content %}
+{%extends 'baseF.html.twig'%} {% block title %}Panier | culture{% endblock %} {%
+block content %}
 
-<body>
-  <!--::header part start::-->
-  <header class="main_menu home_menu">
+<!--::header part start::-->
+<header class="main_menu home_menu">
+  <div class="container">
+    <div class="row align-items-center">
+      <div class="col-lg-12">
+        {{ include("includes/frontoffice/navbar.html.twig") }}
+      </div>
+    </div>
+  </div>
+  <div class="search_input" id="search_input_box">
     <div class="container">
-        <div class="row align-items-center">
-            <div class="col-lg-12">
-                {{include('includes/frontoffice/navbar.html.twig') }}
-            </div>
-        </div>
+      <form class="d-flex justify-content-between search-inner">
+        <input
+          type="text"
+          class="form-control"
+          id="search_input"
+          placeholder="Search Here"
+        />
+        <button type="submit" class="btn"></button>
+        <span class="ti-close" id="close_search" title="Close Search"></span>
+      </form>
     </div>
-    <div class="search_input" id="search_input_box">
-        <div class="container ">
-            <form class="d-flex justify-content-between search-inner">
-                <input type="text" class="form-control" id="search_input" placeholder="Search Here">
-                <button type="submit" class="btn"></button>
-                <span class="ti-close" id="close_search" title="Close Search"></span>
-            </form>
-        </div>
-    </div>
+  </div>
 </header>
-  <!-- Header part end-->
+<!-- Header part end-->
 
-
-  <!--================Home Banner Area =================-->
-  <!-- breadcrumb start-->
-  <section class="breadcrumb breadcrumb_bg">
-    <div class="container">
-      <div class="row justify-content-center">
-        <div class="col-lg-8">
-          <div class="breadcrumb_iner">
-            <div class="breadcrumb_iner_item">
-              <h2>Mes commandes</h2>
-              <p>Home <span>-</span>Mes commandes</p>
-            </div>
+<!--================Home Banner Area =================-->
+<!-- breadcrumb start-->
+<section class="breadcrumb breadcrumb_bg">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="breadcrumb_iner">
+          <div class="breadcrumb_iner_item">
+            <h2>Mes commandes</h2>
+            <p>Home <span>-</span>Mes commandes</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- breadcrumb start-->
+  </div>
+</section>
+<!-- breadcrumb start-->
 
-  <!--================Cart Area =================-->
-  <section class="cart_area padding_top">
-    <div class="container">
-      <div class="cart_inner">
-        <div class="table-responsive">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Date</th>
-                <th scope="col">Prix</th>
-                <th scope="col">Détail</th>
-              </tr>
-            </thead>
-            <tbody>
+<!--================Cart Area =================-->
+<section class="cart_area padding_top">
+  <div class="container">
+    <div class="cart_inner">
+      {% if not app.user %}
+      <p>connecter vous pour voir vos commandes</p>
+      {%else%}
+      <div class="table-responsive">
+        {% if commande is empty%}
+        <p>vous n'avez pas de commandes encours</p>
+        {%else%}
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Date</th>
+              <th scope="col">Prix</th>
+              <th scope="col">Status</th>
+              <th scope="col">Détail</th>
+            </tr>
+          </thead>
+          <tbody>
             {% for commande in commande %}
 
-              <tr>
-                <td>
-                  <div class="media">
-                    <div class="media-body">
-                      <p>{{ commande.date | date('d/m/y à  h/m ' ) }}</p>
-                    </div>
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="media-body">
+                    <p>{{ commande.date | date('d/m/y à  h/m ') }}</p>
                   </div>
-                </td>
-                <td>
-                  <h5>{{ commande.totalPaiment }}</h5>
-                </td>
-                <td>
-                  <a href="{{ path('cmd_detail',{'id':commande.id}) }}">
-                    <h5><i class="fas fa-eye"></i></h5>
-                  </a>
-                </td>
-              </tr>
+                </div>
+              </td>
+              <td>
+                <h5>{{ commande.totalPaiment }}</h5>
+              </td>
+              <td>
+                <h5>En cours</h5>
+              </td>
+              <td>
+                <a href="{{ path('cmd_detail', { id: commande.id }) }}">
+                  <h5><i class="fas fa-eye"></i></h5>
+                </a>
+              </td>
+            </tr>
             {% endfor %}
-            </tbody>
-          </table>
-          
+          </tbody>
+        </table>
+        <div class="navigation text-center">
+          {{ knp_pagination_render(commande) }}
         </div>
+        {% endif%}
       </div>
+      {%endif%}
     </div>
-  </section>
-  {{include('includes/frontoffice/footer.html.twig')}}
-  
-  {% endblock %}
+  </div>
+</section>
+{{ include("includes/frontoffice/footer.html.twig") }}
+
+{% endblock %}

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Service\Cart;
+use Slim\Views\Twig;
 use App\Repository\ProduitsRepository;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
@@ -54,7 +55,7 @@ class CartService
 
     public function getFullCart() :array {
         $panier = $this->session->get('panier',[]);
-
+      
         $panierWithData = [];
 
         foreach($panier as $id => $quantity){
@@ -71,7 +72,9 @@ class CartService
         $total = 0;
 
         $panierWithData = $this->getFullCart();
+        
         foreach($panierWithData as $item){
+           
 
             $price = $item['product']->getPrix();
             $totalItem = $price * $item['quantity'];

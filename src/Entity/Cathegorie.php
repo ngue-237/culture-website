@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Cathegorie
 {
+    public function __toString() {
+        return(string)$this->id;
+    }
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -29,9 +32,10 @@ class Cathegorie
      */
     private $produits;
 
+
     public function __construct()
     {
-        $this->produits = new ArrayCollection();
+        // $this->produits = new ArrayCollection();
     }
 
     
@@ -82,6 +86,12 @@ class Cathegorie
 
         return $this;
     }
+
+    
+
+    
+
+   
 
     
 }

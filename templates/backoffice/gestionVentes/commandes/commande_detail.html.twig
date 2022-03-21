@@ -56,7 +56,7 @@
                                             <td>{{ commande.idCommande }}</td>
                                             <td>
                                                 <a href="{{ path('products_cmd_detail', {'id':commande.idProduit}) }}" > <i class="fas fa-eye"></i></a> &nbsp;
-                                                <a href="{{path('admin_cmd_modifier',{'id':commande.id})}}" > <i class="fas fa-edit"></i></a>&nbsp;
+                                                <a href="{{path('admin_cmd_modifier',{'id':commande.id, 'idCmd':commande.idCommande})}}" > <i class="fas fa-edit"></i></a>&nbsp;
                                                 <a href="{{ path('suppr_prod_cmd', {'id':commande.idProduit}) }}" > <i class="fas fa-trash-alt"></i></a>&nbsp;
                                                 <i class="fas fa-check-circle"></i>
                                             </td>

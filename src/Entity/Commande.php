@@ -37,15 +37,23 @@ class Commande
     private $date;
 
     /**
-     * @ORM\OneToMany(targetEntity=Facture::class, mappedBy="commandes")
+     * @ORM\Column(type="boolean", nullable=true)
      */
-    private $factures;
+    private $status;
 
-    function __construct($idUser,$totalPayment,$date){
+    /**
+     * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="commandes")
+     */
+    private $user;
+
+
+
+    function __construct($idUser,$totalPayment,$date,$status){
         $this->setIdUser($idUser);
         $this->setTotalPaiment($totalPayment);
-        $this->setDate($date);
-        $this->factures = new ArrayCollection();
+        $this->setDate($date); 
+        $this->setStatus($status);
+
     }
 
     public function getId(): ?int
@@ -89,35 +97,28 @@ class Commande
         return $this;
     }
 
-    /**
-     * @return Collection|Facture[]
-     */
-    public function getFactures(): Collection
+    public function getStatus(): ?bool
     {
-        return $this->factures;
+        return $this->status;
     }
 
-    public function addFacture(Facture $facture): self
+    public function setStatus(?bool $status): self
     {
-        if (!$this->factures->contains($facture)) {
-            $this->factures[] = $facture;
-            $facture->setCommandes($this);
-        }
+        $this->status = $status;
 
         return $this;
     }
 
-    public function removeFacture(Facture $facture): self
+    public function getUser(): ?Users
     {
-        if ($this->factures->removeElement($facture)) {
-            // set the owning side to null (unless already changed)
-            if ($facture->getCommandes() === $this) {
-                $facture->setCommandes(null);
-            }
-        }
+        return $this->user;
+    }
+
+    public function setUser(?Users $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }
-
 
 }

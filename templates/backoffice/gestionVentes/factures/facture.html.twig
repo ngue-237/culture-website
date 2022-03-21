@@ -9,18 +9,32 @@
     <title>Facture</title>
 </head>
 <body>
-<div class="row">
-    <div class="col-lg-6">
-        <h4> Identifiant Utilisateur : {{ commande.idUser }}</h4>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-lg-8 ">
+            <a href="{{ path('facture_download', {'id':commande.id}) }}">
+                <button class="btn btn-primary">
+                    Télécharger La Facture
+                </button>
+            </a>
+        </div>
     </div>
-    <div class="col-lg-6 ">
-        <h4> Date <span>
+    <div class="row">
+        <div class="col-lg-12 offset-5 ">
+            <h1> Votre facture</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6">
+            <h4> Identifiant Utilisateur : {{ commande.idUser }}</h4>
+        </div>
+        <div class="col-lg-6 ">
+            <h4> Date <span>
                 {{ commande.date | date("d/m/y à h:m") }}
             </span>
-        </h4>
+            </h4>
+        </div>
     </div>
-</div>
-<div class="container-fluid">
     <table class="table table-hover">
         <thead>
         <tr>

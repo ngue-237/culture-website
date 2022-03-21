@@ -1,0 +1,36 @@
+{%extends 'baseF.html.twig'%}
+{% block title %}Panier | culture{% endblock %}
+{% block content %}
+
+    <body>
+    <!--::header part start::-->
+    <header class="main_menu home_menu">
+        <div class="container">
+            <div class="row align-items-center">
+                <div class="col-lg-12">
+                    {{include('includes/frontoffice/navbar.html.twig') }}
+                </div>
+            </div>
+        </div>
+        <div class="search_input" id="search_input_box">
+            <div class="container ">
+                <form class="d-flex justify-content-between search-inner">
+                    <input type="text" class="form-control" id="search_input" placeholder="Search Here">
+                    <button type="submit" class="btn"></button>
+                    <span class="ti-close" id="close_search" title="Close Search"></span>
+                </form>
+            </div>
+        </div>
+    </header>
+
+
+    <!--================Cart Area =================-->
+    <section class="cart_area padding_top">
+        <div class="container">
+            <h1>Oups something wrong!</h1>
+
+        </div>
+    </section>
+    {{include('includes/frontoffice/footer.html.twig')}}
+
+{% endblock %}

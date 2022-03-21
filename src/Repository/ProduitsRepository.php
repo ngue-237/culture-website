@@ -19,6 +19,8 @@ class ProduitsRepository extends ServiceEntityRepository
         parent::__construct($registry, Produits::class);
     }
 
+   
+
     // /**
     //  * @return Produits[] Returns an array of Produits objects
     //  */
@@ -47,4 +49,23 @@ class ProduitsRepository extends ServiceEntityRepository
         ;
     }
     */
+     public function ProduitsTritée()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.prix)')
+            ->andWhere('p.prix != :val')
+            ->setParameter('val', '50' )
+            ->getQuery()->getSingleScalarResult()
+            ;
+    }
+
+    public function ProduitsNonTritée()
+    {
+        return $this->createQueryBuilder('p')
+            ->select('count(p.prix)')
+            ->andWhere('p.prix = :val')
+            ->setParameter('val', '50' )
+            ->getQuery()->getSingleScalarResult()
+            ;
+    }
 }

@@ -13,7 +13,7 @@ use App\Service\Cart\CartService;
 class CartController extends AbstractController
 {
     /**
-     * @Route("/cart", name="cart")
+     * @Route("/panier/cart", name="cart")
      */
     public function index(SessionInterface $session, ProduitsRepository $rep,CartService $cartService)
     {
